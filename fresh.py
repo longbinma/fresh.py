@@ -13,9 +13,14 @@ def log():
 	otherStyleTime=now.strftime("%Y-%m-%d %H:%M:%S")
 	f.write(otherStyleTime + "\r\n")
 	f.close()
-def walk_device():
-	if not ignore_current.strip():
-		print 'ignore_current is null'
-	print device
-	print ignore_current
-walk_device(top_device,device_file,url_file)
+def refresh(device_type,*arg):
+	print arg
+def walk_device(device,device_file,url_file,*arg):
+	if not arg:
+		device_type=filter(str.isalpha,device)
+		device_ip=filter(lambda ch: ch in '0123456789.',device)
+		refresh(device_type,device_ip,url_file)
+	else:
+		device_ip=device
+walk_device(top_device,device_file,url_file,"ignore")
+
